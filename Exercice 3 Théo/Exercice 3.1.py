@@ -30,8 +30,9 @@ def main():
         return peoples_in[index]
 
     printNames(peoples, peoples_in)
-    i = 0
-    for people in peoples:
+    # i = 0
+    # for people in peoples:
+    for i, people in enumerate(peoples):
         sleep(1)
         random_number = randint(0, len(peoples)-1)
         while peoples[random_number] == "":
