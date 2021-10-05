@@ -12,13 +12,15 @@ from msvcrt import getch
 
 from settings import *
 
+persons_list = []
 
 def showList():
-    print(persons_list)
+    for person in persons_list:
+        print(f"{person['name']} {person['surname']}, {person['age']}ans ({person['gender'].upper()}) | {person['points']}pts")
 
 def addPerson():
     try:
-        name = input("Nom de la personne que vous voulez ajouter ?\033[K ")
+        name = input("Prénom de la personne que vous voulez ajouter ?\033[K ")
         if len(name) <= 2:
             return print("Le nom doit faire minimum 2 caractères !")
         surname = input("Nom de famille ?\033[K ")
@@ -29,17 +31,93 @@ def addPerson():
         if gender.lower() != "m" and gender.lower() != 'f':
             return print("Le genre doit être M ou F ! ")
         print("\033[K\n\033[K")
+        persons_list.append({
+            "name":name,
+            "surname": surname,
+            "age": age,
+            "gender": gender.lower(),
+            "points": 0
+        })
         print("La personne à bien été ajouté !")
     except ValueError:
         print("\n\nL'age doit être un nombre entier !")
+
+def chooseBetweenMultiples(index_names):
+    choose_index = 0
+    print('Il y a plusieurs personnes de ce nom la, veuillez choisir: \n')
+    for index in index_names:
+        print(f"{index+1}: {persons_list[index]['name']} {persons_list[index]['surname']}, {persons_list[index]['age']}ans ({persons_list[index]['age']})")
+
+    try:
+        choose_index = int(input("Index de la personne choisie: ")) -1
+        if not choose_index-1 in index_names:
+            return print("L'index choisis n'etait pas dans la liste !")
+    except:
+        return print('Nombre invalide !')
+    
+    print()
+    return choose_index
+    
+
+def delPerson():
+    name = input("Prénom de la personne que vous voulez supprimer ? ").lower()
+    index_names = [i for i in range(len(persons_list)) if persons_list[i]['name'].lower() == name]
+    if index_names == []: return print("Il n'y a personne de ce nom la, verifier l'orthographe !")
+    index_to_del = index_names[0]
+    if len(index_names) > 1:
+        index_to_del = chooseBetweenMultiples(index_names)
+    person_deleted = persons_list.pop(index_to_del)
+    print(f"{person_deleted['name']} {person_deleted['surname']} a été supprimé !")
+
+def addPoints():
+    name = input("Prénom de la personne à qui vous voulez ajouter des points ? ").lower()
+    index_names = [i for i in range(len(persons_list)) if persons_list[i]['name'].lower() == name]
+    if index_names == []: return print("Il n'y a personne de ce nom la, verifier l'orthographe !")
+    index_to_add = index_names[0]
+    if len(index_names) > 1:
+        index_to_add = chooseBetweenMultiples(index_names)
+    
+    points = 0
+    try:
+        points=int(input(f"Combien de points voulez ajouter à {persons_list[index_to_add]['name']}? "))
+    except:
+        return print('Nombre invalide !')
+    persons_list[index_to_add]['points'] += points
+    print(f"{persons_list[index_to_add]['name']} {persons_list[index_to_add]['surname']} a gagné {points} points ! {'Il' if persons_list[index_to_add]['gender'] == 'm' else 'Elle'} a maintenant {persons_list[index_to_add]['points']} points !")
+
+def save():
+    if persons_list == []: 
+        return print("La liste est vide ! ")
+    save_name = input('Nom de la sauvegarde ? ')
+    with open(f'./Data/{save_name}.json', 'w', encoding="utf-8") as json_file:
+        json.dump(persons_list, json_file, ensure_ascii=False, indent=4)
+        print(f"La liste a été sauvegarder a l'emplacement ./Data/{save_name}.json")
+    return
+
+def load():
+    saves = [f for f in os.listdir("./Data") if os.path.isfile(os.path.join("./Data", f))]
+    for index, save in enumerate(saves):
+        print(f"{index+1}: {save}")
+    try:
+        choose_index = int(input("Index de la save choisie: ")) -1
+        if choose_index - 1 < 0 and choose_index - 1 >= len(saves):
+            return print("L'index choisis n'etait pas dans la liste !")
+    except:
+        return print('Nombre invalide !')
+    
+    with open(f"./Data/{saves[choose_index]}", "r", encoding="utf-8") as s:
+            persons_list.clear()
+            persons_list.extend(json.load(s))
+            print(f"{saves[choose_index]} a été charger !")
+    
+
 def printAt(x, y, text):
     print(f"{format_prefix}{y};{x}{position_suffix}{text}")
 
 def main():
-    user_input = 0
     pointer = "\033[5m←\033[0m"
     pointer_pos = 1
-    menu = ["Afficher la liste de personnes.","Ajouter une personne.", "Supprimer une personne.", "Ajouter des points à une personne.", "Sauvegarder.", "Charger."]
+    menu = ["Afficher la liste de personnes.","Ajouter une personne.", "Supprimer une personne.", "Ajouter des points à une personne.", "Sauvegarder.", "Charger.", "Quitter."]
     
     os.system("cls")
     for i in range(len(menu)):
@@ -55,12 +133,26 @@ def main():
 
         command = ord(getch())
         if command == 13:
+            for i in range(20):
+                print('\033[K')
+            printAt(1, len(menu) + 1, "")
+            print()
             if pointer_pos == 1:
                 print()
                 showList()
             elif pointer_pos == 2:
                 print()
                 addPerson()
+            elif pointer_pos == 3:
+                delPerson()
+            elif pointer_pos == 4:
+                addPoints()
+            elif pointer_pos == 5:
+                save()
+            elif pointer_pos == 6:
+                load()
+            elif pointer_pos == 7:
+                quit()
         elif command == 72:
             if pointer_pos == 1:
                 continue
