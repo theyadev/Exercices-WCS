@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Theo",
+        "surname": "Fassi",
+        "age": 16,
+        "gender": "m",
+        "points": 50
+    },
+    {
+        "name": "Theo",
+        "surname": "Luis",
+        "age": 20,
+        "gender": "m",
+        "points": 60
+    }
+]

@@ -15,8 +15,26 @@ from settings import *
 persons_list = []
 
 def showList():
+    sort_list = input("Voulez-vous trier la liste ? ").lower()
+    new_list = list(persons_list)
+    if sort_list == 'y' or sort_list == "yes" or sort_list == 'o' or sort_list == "oui":
+        sort_possibility = [('Nom', "name", False), ("Nom de Famille", "surname", False), ("Age", "age", True), ("Points", "points", True)]
+        for index, e in enumerate(sort_possibility):
+            print(f"{index+1} : Trier par {sort_possibility[index][0]}")
+        print()
+        try:
+            choose_index = int(input("Index choisie: ")) -1
+            if choose_index < 0 or choose_index >= len(sort_possibility):
+                return print("L'index choisis n'etait pas dans la liste !")
+        except:
+            return print('Nombre invalide !')
+        persons_list.sort(key=lambda x: x[sort_possibility[choose_index][1]], reverse=sort_possibility[choose_index][2])
+
+    print()
     for person in persons_list:
         print(f"{person['name']} {person['surname']}, {person['age']}ans ({person['gender'].upper()}) | {person['points']}pts")
+    persons_list.clear()
+    persons_list.extend(new_list)
 
 def addPerson():
     try:
@@ -100,7 +118,7 @@ def load():
         print(f"{index+1}: {save}")
     try:
         choose_index = int(input("Index de la save choisie: ")) -1
-        if choose_index - 1 < 0 and choose_index - 1 >= len(saves):
+        if choose_index < 0 or choose_index >= len(saves):
             return print("L'index choisis n'etait pas dans la liste !")
     except:
         return print('Nombre invalide !')
