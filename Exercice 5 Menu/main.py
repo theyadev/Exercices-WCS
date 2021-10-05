@@ -26,7 +26,7 @@ def addPerson():
             return print("Le nom de famille doit faire minimum 2 caractères !")
         age = int(input("Age ?\033[K "))
         gender = input("Sexe ? (M/F)\033[K ")
-        if gender.lower() != "m" or gender.lower() != 'f':
+        if gender.lower() != "m" and gender.lower() != 'f':
             return print("Le genre doit être M ou F ! ")
         print("\033[K\n\033[K")
         print("La personne à bien été ajouté !")
