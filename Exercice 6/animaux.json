@@ -1,0 +1,134 @@
+{
+  "Lapin": {
+    "names": [
+      "Bandit",
+      "Basil",
+      "Batman",
+      "Ben",
+      "Bill",
+      "Biloute",
+      "Biscuit",
+      "Booster",
+      "Bouboule",
+      "Bounty",
+      "Panpan"
+    ],
+    "max_speed": 40,
+    "min_speed": 20,
+    "colors": ["Blanc", "Jaune"]
+  },
+  "Chat": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Grosminet"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  },
+  "Mésange": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Pioupiou"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  },
+  "Python": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Kaa"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  },
+  "Chien": {
+    "names": ["Pipo"],
+    "max_speed": 40,
+    "min_speed": 20,
+    "colors": ["Blanc", "Jaune"]
+  },
+  "Tourterelle": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Panpan"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  },
+  "Coccinelle": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Panpan"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  },
+  "Abeille": {
+    "names": [
+        "Bandit",
+        "Basil",
+        "Batman",
+        "Ben",
+        "Bill",
+        "Biloute",
+        "Biscuit",
+        "Booster",
+        "Bouboule",
+        "Bounty",
+        "Panpan"
+      ],
+      "max_speed": 40,
+      "min_speed": 20,
+      "colors": ["Blanc", "Jaune"]
+  }
+}
